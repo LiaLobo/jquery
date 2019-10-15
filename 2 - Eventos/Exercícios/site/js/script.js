@@ -29,10 +29,54 @@ $(function(){
 
         $('#free').change(function(){
 
-            if ($('#free').prop('checked')){
+            if ($(this).prop('checked')){
                 $('.price').hide();
             } else {
                 $('.price').show();
             }
         })
+
+//Código para validar campos obrigatórios 
+        $('form').submit(function(e){
+            let valid = true;
+
+            if ($('#title').is(':visible') && $('#title').val() == ''){
+                $('#title').css('border', '1px solid red');
+                valid = false
+            }
+
+            if ($('#synopsis').is(':visible') && $('#synopsis').val() == ''){
+                $('#synopsis').css('border', '1px solid red');
+                valid = false
+            }
+
+//Esse preventDefault está dentro de um if para que ele só aconteça caso tenhamos os campos obrigatórios vazios. Se deixarmos fora do if
+// ele irá sempre prevenir o carregamento da página.
+            if (valid == false){
+                e.preventDefault();
+            }
+        });
 });
+
+//Resolução com SWITCH CASE
+//$(function(){
+
+
+//   $('#eventType').change(function(){
+//     let selected = $('#eventType :selected').val();
+//     $('.esconde').show();
+//     switch(selected){
+//          case 'Teatro':
+//               $('.teatroHide').hide();
+//                $('.teatroShow').show();
+//                break;
+//            case 'Cinema' :
+//                $('.cineHide').hide();
+//                $('.cineShow').show();
+//                break;
+//            case ... até o case padrão
+//
+//            default :
+//                $('.esconde').hide();
+//      }
+//});
