@@ -5,21 +5,19 @@ $(function () {
         dataType: "xml",
         success: function (data) {
             $(data).find('restaurant').each(function () {
-                 let html = //'<ul>' +
-                    '<li class="list-group-item list-group-item-light">' + '<div class="d-flex w-100 justify-content-between">' +
-                    '<h5 class="mb-1">' + $(this).attr('name') + '</h5>' + '</div>'  + '<p>' + $(this).attr('address') +
-                    '</p>' + '<a href="#" target="_blank">' + $(this).attr('lat') + $(this).attr('lng') + '</a>' + '</li>' 
-                    // '<li>' + $(this).find('name').text() + '' + $(this).find('address').text() + '</li>' +
-                    // '<li>' + $(this).find('name').text() + '' + $(this).find('address').text() + '</li>' +
-                    // '<li>' + $(this).find('name').text() + '' + $(this).find('address').text() + '</li>' +
-                    // '<li>' + $(this).find('name').text() + '' + $(this).find('address').text() + '</li>' +
-                    // '<li>' + $(this).find('name').text() + '' + $(this).find('address').text() + '</li>' +
-                    // '<li>' + $(this).find('name').text() + '' + $(this).find('address').text() + '</li>' +
-                    // '<li>' + $(this).find('name').text() + '' + $(this).find('address').text() + '</li>' +
-                    // '<li>' + $(this).find('name').text() + '' + $(this).find('address').text() + '</li>' +
-                    // '</ul>';
+                let classe = "list-group-item-light";
+                if ($(this).attr('type') == "bar") {
+                    classe = "list-group-item-dark";
+                }
 
-                $('ul').append(html);
+                let item = '<li class="list-group-item ' + classe + '">' +
+                    '<div class="d-flex w-100 justify-content-between">' +
+                    '<h5 class="mb-1">' + $(this).attr('name') + '</h5>' +
+                    '</div><p class="mb-1">' + $(this).attr('address') + '</p>' +
+                    '<small>'+'<a href="http://maps.google.com/maps?q='+ $(this).attr('lat') +
+                    ',' + $(this).attr('lng') + '" target="_blank"> Ver no mapa </a>' + '</small></li>'
+
+                $('ul').append(item);
             });
         },
         error: function () {
